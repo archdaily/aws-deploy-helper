@@ -1,0 +1,19 @@
+path:
+  ssh_config_file: '/var/lib/jenkins/.ssh/config'     # the file where you will save the ssh keys
+  cap_config_file: '/var/lib/jenkins/cap_config.yml'  # the file where you will save the capistrano configs
+aws:
+  access_key_id: 'YOUR_ACCESS_KEY_ID'                 # aws user with read permissions to ec2
+  secret_access_key: 'YOUR_SECRET_KEY'
+sites:
+  project_one:
+    elb: 'project_one.elb.amazonaws.com'               # the hostname of the project's elb
+    region: 'us-east-1'                                # the region of the ASG
+    keys: '~/.ssh/keys/keys_one.pem'                   # the key's path 
+  project_two:
+    elb: 'project_two.elb.amazonaws.com'
+    region: 'us-east-1'
+    keys: '~/.ssh/keys/keys_two.pem'
+  project_three:
+    elb: 'project_three.elb.amazonaws.com'
+    region: 'us-east-1'
+    keys: '~/.ssh/keys/keys_three.pem'
