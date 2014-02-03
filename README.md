@@ -55,4 +55,8 @@ $ ssh project_one_2
 $ ssh project_two_1
 ```
 
-So, you can read this <<cap_config_file>> and proceed to deploy *project_one* to the instances *project_one_1* and *project_one_2*
+So, you can read this *cap_config_file* and proceed to deploy *project_one* to the instances *project_one_1* and *project_one_2*
+
+Acknowledgment
+==============
+Thanks to [Felipe Espinoza](https://github.com/fespinoza) who wrote a preliminar version of the *AWSSite Class*.
