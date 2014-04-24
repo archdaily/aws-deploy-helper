@@ -11,6 +11,8 @@ begin
   @config['sites'].each_pair do |site_name,v|
     puts "site: #{site_name}"
     cap_config.write("  #{site_name}:\n")
+
+    # getting list from AWS
     site = AWSSite.new (site_name)
     site.instances.each_with_index do |instance, index|
       puts " - #{instance[:hostname]} (#{instance[:id]})"
@@ -23,6 +25,23 @@ begin
 
       cap_config.write("   - #{site_name}_#{index+1}\n")
     end
+
+    # additional instances for site_name
+    additional_instances = @config["sites"][site_name]["additional_instances"]
+    if additional_instances
+      additional_instances.each_pair do |k, v|
+        puts " (*) #{v} (#{k})"
+        
+        ssh_config.write("Host #{site_name}_#{k}\n")
+        ssh_config.write("  Hostname #{v}\n")
+        ssh_config.write("  User ubuntu\n")
+        ssh_config.write("  IdentityFile #{@config["sites"][site_name]["keys"]}\n")
+        ssh_config.write("  StrictHostKeyChecking no\n\n")
+
+        cap_config.write("   - #{site_name}_#{k}\n") 
+      end
+    end
+    
   end
   ssh_config.write("# #{Time.now}\n")
   ssh_config.rewind
