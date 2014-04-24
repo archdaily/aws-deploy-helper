@@ -13,3 +13,5 @@ sites:
     elb: 'project_two.elb.amazonaws.com'
     region: 'us-east-1'
     keys: '~/.ssh/keys/keys_two.pem'
+    additional_instances: # instances not attached to elb
+      worker: 'project_third.elb.amazonaws.com'
