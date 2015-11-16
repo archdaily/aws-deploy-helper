@@ -21,7 +21,8 @@ begin
       ssh_config.write("  Hostname #{instance[:hostname]}\n")
       ssh_config.write("  User ubuntu\n")
       ssh_config.write("  IdentityFile #{@config["sites"][site_name]["keys"]}\n")
-      ssh_config.write("  StrictHostKeyChecking no\n\n")
+      ssh_config.write("  StrictHostKeyChecking no\n")
+      ssh_config.write("  UserKnownHostsFile no\n\n")
 
       cap_config.write("   - #{site_name}_#{index+1}\n")
     end
@@ -36,7 +37,8 @@ begin
         ssh_config.write("  Hostname #{v}\n")
         ssh_config.write("  User ubuntu\n")
         ssh_config.write("  IdentityFile #{@config["sites"][site_name]["keys"]}\n")
-        ssh_config.write("  StrictHostKeyChecking no\n\n")
+        ssh_config.write("  StrictHostKeyChecking no\n")
+        ssh_config.write("  UserKnownHostsFile no\n\n")
 
         cap_config.write("   - #{site_name}_#{k}\n") 
       end
