@@ -15,10 +15,11 @@ begin
     # getting list from AWS
     site = AWSSite.new (site_name)
     site.instances.each_with_index do |instance, index|
-      puts " - #{instance[:hostname]} (#{instance[:id]})"
+      hostname_or_ip = instance[:hostname] || instance[:ip]
+      puts " - #{hostname_or_ip} (#{instance[:id]})"
 
       ssh_config.write("Host #{site_name}_#{index+1}\n")
-      ssh_config.write("  Hostname #{instance[:hostname]}\n")
+      ssh_config.write("  Hostname #{hostname_or_ip}\n")
       ssh_config.write("  User ubuntu\n")
       ssh_config.write("  IdentityFile #{@config["sites"][site_name]["keys"]}\n")
       ssh_config.write("  StrictHostKeyChecking no\n")
