@@ -8,10 +8,9 @@ sites:
   project_one:
     elb: 'project_one.elb.amazonaws.com'               # the hostname of the project's elb
     region: 'us-east-1'                                # the region of the ASG
-    keys: '~/.ssh/keys/keys_one.pem'                   # the key's path 
-  project_two:
+    keys: '~/.ssh/keys/keys_one.pem'                   # the key's path
+  project_two_without_keys:
     elb: 'project_two.elb.amazonaws.com'
     region: 'us-east-1'
-    keys: '~/.ssh/keys/keys_two.pem'
     additional_instances: # instances not attached to elb
       worker: 'project_third.elb.amazonaws.com'

@@ -21,7 +21,7 @@ class AWSSite
     raise AWSSite::NoELBError unless @elb != nil
 
     @asg = initialize_asg(@main_asg, @elb.id)
-    
+
     credentials[:provider] = 'AWS'
     @compute = Fog::Compute.new credentials
     @credentials = credentials
@@ -51,11 +51,15 @@ class AWSSite
 
 
   private
-  
+
   def initialize_elb(credentials, dns_name)
-    Fog::AWS::ELB.new(credentials).load_balancers.select do |elb|
-      elb.dns_name == dns_name
-    end.first
+    begin
+      Fog::AWS::ELB.new(credentials).load_balancers.select do |elb|
+        elb.dns_name == dns_name
+      end.first
+    rescue Exception => e
+      puts e.message
+    end
   end
 
   def initialize_asg(main_asg, elb_id)
