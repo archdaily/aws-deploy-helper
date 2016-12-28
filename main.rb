@@ -38,7 +38,7 @@ begin
         ssh_config.write("Host #{site_name}_#{k}\n")
         ssh_config.write("  Hostname #{v}\n")
         ssh_config.write("  User ubuntu\n")
-        ssh_config.write("  IdentityFile #{@config["sites"][site_name]["keys"]}\n")
+        ssh_config.write("  IdentityFile #{@config["sites"][site_name]["keys"]}\n") if @config["sites"][site_name]["keys"]
         ssh_config.write("  StrictHostKeyChecking no\n")
         ssh_config.write("  UserKnownHostsFile no\n\n")
 
